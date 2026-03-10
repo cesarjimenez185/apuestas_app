@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber AI Pro | La Mejor Barbería Premium</title>
+    <meta name="description" content="Barbería premium con asesor AI. Cortes, barbas, productos de grooming. Reserva tu cita ahora.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪒</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🪒</div>
+                <span>Barber AI Pro</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#cortes" class="nav-link">Cortes</a></li>
+                <li><a href="#productos" class="nav-link">Productos</a></li>
+                <li><a href="#promociones" class="nav-link">Promos</a></li>
+                <li><a href="#mis-citas" class="nav-link">Mis Citas</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" onclick="document.getElementById('ai-chat').scrollIntoView({behavior: 'smooth'})">
+                    💬 Chat AI
+                </button>
+                <button class="btn btn-secondary" onclick="document.getElementById('mis-citas').scrollIntoView({behavior: 'smooth'})">
+                    📋 Mis Citas
+                </button>
+                <button class="btn btn-primary" onclick="openReservaModal()">
+                    📅 Reservar
+                </button>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Tu Estilo,<br><span>Nuestra Pasión</span></h1>
+                <p>Descubre el poder de un look perfecto con nuestra asesoría AI y barberos expertos. Más que un corte, una transformación.</p>
+                <div class="hero-buttons">
+                    <a href="#reservar" class="btn btn-primary" onclick="openReservaModal()">
+                        Reservar Cita 📅
+                    </a>
+                    <a href="#servicios" class="btn btn-secondary">
+                        Ver Servicios
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=700&fit=crop" alt="Barbero profesional" loading="eager">
+                <div class="hero-badge">
+                    <h4>500+</h4>
+                    <p>Clientes satisfechos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section class="services" id="servicios">
+        <div class="section-header">
+            <h2>Nuestros <span>Servicios</span></h2>
+            <p>Experiencia premium con los mejores profesionales y productos de calidad</p>
+        </div>
+        <div class="services-grid" id="servicesGrid">
+            <!-- Servicios cargados dinámicamente -->
+        </div>
+    </section>
+
+    <!-- Cortes Section -->
+    <section class="cortes" id="cortes">
+        <div class="section-header">
+            <h2>Estilos de <span>Corte</span></h2>
+            <p>Los cortes más trending del momento, adaptados a tu estilo</p>
+        </div>
+        <div class="cortes-grid" id="cortesGrid">
+            <!-- Cortes cargados dinámicamente -->
+        </div>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section class="ai-chat" id="ai-chat">
+        <div class="section-header">
+            <h2>Asesor <span>AI</span></h2>
+            <p>Chatea con nuestro asistente virtual para recomendaciones personalizadas</p>
+        </div>
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-avatar">🪒</div>
+                <div class="chat-info">
+                    <h3>Barber AI Pro</h3>
+                    <p>● En línea</p>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Mensajes del chat -->
+            </div>
+            <div class="quick-actions">
+                <button class="quick-btn" data-message="Quiero un corte moderno">🎯 Corte moderno</button>
+                <button class="quick-btn" data-message="Recomiéndame un estilo de barba">🧔 Estilo barba</button>
+                <button class="quick-btn" data-message="Quiero reservar una cita">📅 Reservar cita</button>
+                <button class="quick-btn" data-message="¿Qué productos me recomiendas?">🛒 Productos</button>
+                <button class="quick-btn" data-message="¿Cuáles son los precios?">💰 Precios</button>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+                <button class="chat-send" id="chatSend">➤</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Section -->
+    <section class="productos" id="productos">
+        <div class="section-header">
+            <h2>Productos <span>Premium</span></h2>
+            <p>Los mejores productos de grooming para tu rutina diaria</p>
+        </div>
+        <div class="productos-grid" id="productosGrid">
+            <!-- Productos cargados dinámicamente -->
+        </div>
+    </section>
+
+    <!-- Promociones Section -->
+    <section class="promociones" id="promociones">
+        <div class="section-header">
+            <h2>Ofertas <span>Especiales</span></h2>
+            <p>Aprovecha nuestras promociones exclusivas</p>
+        </div>
+        <div class="promos-grid" id="promosGrid">
+            <!-- Promociones cargadas dinámicamente -->
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section class="contact" id="contacto">
+        <div class="section-header">
+            <h2>Contáctanos</h2>
+            <p>Estamos listos para atenderte</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Visítanos</h3>
+                <p>Tu barbería de confianza con los mejores profesionales</p>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h4>Dirección</h4>
+                        <p>Av. Principal 123, Ciudad</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <h4>Teléfono</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-details">
+                        <h4>Horario</h4>
+                        <p>Lun-Sáb: 9am - 9pm</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>hola@barberaipro.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Envíanos un mensaje</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactNombre">Nombre</label>
+                        <input type="text" id="contactNombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMensaje">Mensaje</label>
+                        <textarea id="contactMensaje" name="mensaje" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Enviar Mensaje ➤
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mis Citas Section -->
+    <section class="mis-citas" id="mis-citas" style="background: var(--primary); padding: 4rem 2rem;">
+        <div class="section-header">
+            <h2>Mis <span>Citas</span></h2>
+            <p>Historial de tus citas reservadas</p>
+        </div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="citas-panel" id="citasPanel">
+                <h3>📅 Citas Reservadas</h3>
+                <div class="citas-list" id="citasList">
+                    <div class="cita-vacia">
+                        <p>No tienes citas reservadas aún.</p>
+                        <button class="btn btn-primary" onclick="openReservaModal()" style="margin-top: 1rem;">
+                            Reservar una Cita
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🪒</div>
+                    <span>Barber AI Pro</span>
+                </a>
+                <p>Tu barbería de confianza con asesoría AI para encontrar el estilo perfecto.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📼</a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Corte Clásico</a></li>
+                    <li><a href="#servicios">Fade Profesional</a></li>
+                    <li><a href="#servicios">Corte + Barba</a></li>
+                    <li><a href="#servicios">Afeitado</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#productos">Ceras</a></li>
+                    <li><a href="#productos">Pomadas</a></li>
+                    <li><a href="#productos">Aceites</a></li>
+                    <li><a href="#productos">Shampoos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="#ai-chat">Asesor AI</a></li>
+                    <li><a href="#promociones">Promociones</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 Barber AI Pro. Todos los derechos reservados.</p>
+            <p>Diseñado con ❤️ para los amantes del estilo</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Reserva -->
+    <div class="modal" id="reservaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📅 Reservar Cita</h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <form id="reservaForm">
+                <div class="form-group">
+                    <label for="reservaNombre">Nombre Completo</label>
+                    <input type="text" id="reservaNombre" name="nombre" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label for="reservaServicio">Servicio</label>
+                    <select id="reservaServicio" name="servicio" required>
+                        <option value="">Selecciona un servicio</option>
+                        <option value="Corte Clásico">Corte Clásico - $25</option>
+                        <option value="Fade Profesional">Fade Profesional - $30</option>
+                        <option value="Corte + Barba">Corte + Barba - $45</option>
+                        <option value="Perfilado de Barba">Perfilado de Barba - $15</option>
+                        <option value="Afeitado Clásico">Afeitado Clásico - $20</option>
+                        <option value="Diseño de Barba">Diseño de Barba - $25</option>
+                        <option value="Tratamiento Capilar">Tratamiento Capilar - $35</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reservaFecha">Fecha</label>
+                    <input type="date" id="reservaFecha" name="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="reservaHora">Hora</label>
+                    <input type="time" id="reservaHora" name="hora" required min="09:00" max="20:00">
+                </div>
+                <div class="form-group">
+                    <label for="reservaTelefono">Teléfono (opcional)</label>
+                    <input type="tel" id="reservaTelefono" name="telefono" placeholder="Tu teléfono">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Confirmar Reserva ✓
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/agent.js"></script>
+    <script src="skills/cortes.js"></script>
+    <script src="skills/barba.js"></script>
+    <script src="skills/reserva.js"></script>
+    <script src="skills/servicios.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

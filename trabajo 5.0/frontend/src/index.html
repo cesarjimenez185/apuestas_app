@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BetFoot - Apuestas de Fútbol</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Login Screen -->
+    <div id="login-screen" class="auth-screen">
+      <div class="auth-container">
+        <div class="auth-logo">
+          <i class="fas fa-futbol"></i>
+          <h1>BetFoot</h1>
+        </div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+          <button class="auth-tab" data-tab="register">Registrarse</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Contraseña</label>
+            <input type="password" id="login-password" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-primary">Iniciar Sesión</button>
+          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </form>
+        
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <label for="register-name">Nombre</label>
+            <input type="text" id="register-name" required placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" required placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Contraseña</label>
+            <input type="password" id="register-password" required placeholder="Mínimo 6 caracteres" minlength="6">
+          </div>
+          <div class="form-group">
+            <label for="register-confirm">Confirmar Contraseña</label>
+            <input type="password" id="register-confirm" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-primary">Crear Cuenta</button>
+        </form>
+        
+        <div id="auth-error" class="auth-error hidden"></div>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-app" class="hidden">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo">
+            <i class="fas fa-futbol"></i>
+            <span>BetFoot</span>
+          </div>
+        </div>
+        
+        <nav class="main-nav">
+          <a href="#" class="nav-link active" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+          </a>
+          <a href="#" class="nav-link" data-page="live">
+            <i class="fas fa-circle live-dot"></i>
+            <span>En Vivo</span>
+          </a>
+          <a href="#" class="nav-link" data-page="profile">
+            <i class="fas fa-user"></i>
+            <span>Mi Perfil</span>
+          </a>
+        </nav>
+        
+        <div class="header-right">
+          <div class="balance-display">
+            <i class="fas fa-wallet"></i>
+            <span id="user-balance">$0.00</span>
+          </div>
+          <button class="btn-logout" id="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h3>Ligas</h3>
+          <button class="sidebar-close" id="sidebar-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="league-list">
+          <button class="league-item active" data-league="all">
+            <span class="league-icon">🌍</span>
+            Todas las Ligas
+          </button>
+          <button class="league-item" data-league="Premier League">
+            <span class="league-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+            Premier League
+          </button>
+          <button class="league-item" data-league="La Liga">
+            <span class="league-icon">🇪🇸</span>
+            La Liga
+          </button>
+          <button class="league-item" data-league="Champions League">
+            <span class="league-icon">🏆</span>
+            Champions League
+          </button>
+          <button class="league-item" data-league="Serie A">
+            <span class="league-icon">🇮🇹</span>
+            Serie A
+          </button>
+          <button class="league-item" data-league="Bundesliga">
+            <span class="league-icon">🇩🇪</span>
+            Bundesliga
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+          <div class="page-header">
+            <h2>Partidos</h2>
+            <div class="page-filters">
+              <button class="filter-btn active" data-filter="all">Todos</button>
+              <button class="filter-btn" data-filter="scheduled">Próximos</button>
+              <button class="filter-btn" data-filter="finished">Finalizados</button>
+            </div>
+          </div>
+          <div id="matches-container" class="matches-grid">
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Cargando partidos...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Matches Page -->
+        <div id="live-page" class="page">
+          <div class="page-header">
+            <h2>
+              <span class="live-indicator"></span>
+              Partidos en Vivo
+            </h2>
+          </div>
+          <div id="live-matches-container" class="matches-grid">
+            <div class="loading-spinner">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Cargando partidos en vivo...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-page" class="page">
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+              <h2 id="profile-name">Usuario</h2>
+              <p id="profile-email">email@example.com</p>
+            </div>
+          </div>
+          
+          <div class="profile-stats">
+            <div class="stat-card">
+              <i class="fas fa-wallet"></i>
+              <div class="stat-content">
+                <span class="stat-label">Balance</span>
+                <span class="stat-value" id="profile-balance">$0.00</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <i class="fas fa-trophy"></i>
+              <div class="stat-content">
+                <span class="stat-label">Apuestas Ganadas</span>
+                <span class="stat-value" id="profile-won">0</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <i class="fas fa-chart-line"></i>
+              <div class="stat-content">
+                <span class="stat-label">Total Apostado</span>
+                <span class="stat-value" id="profile-total">$0.00</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="profile-bets">
+            <div class="bets-tabs">
+              <button class="bets-tab active" data-bets="pending">Activas</button>
+              <button class="bets-tab" data-bets="won">Ganadas</button>
+              <button class="bets-tab" data-bets="lost">Perdidas</button>
+              <button class="bets-tab" data-bets="all">Todas</button>
+            </div>
+            <div id="bets-list" class="bets-list">
+              <div class="empty-state">
+                <i class="fas fa-ticket-alt"></i>
+                <p>No hay apuestas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bet Slip Sidebar -->
+      <aside class="bet-slip" id="bet-slip">
+        <div class="bet-slip-header">
+          <h3>
+            <i class="fas fa-ticket-alt"></i>
+            Ticket de Apuestas
+          </h3>
+          <span class="bet-count" id="bet-count">0</span>
+        </div>
+        
+        <div id="bet-slip-items" class="bet-slip-items">
+          <div class="empty-bet-slip">
+            <i class="fas fa-futbol"></i>
+            <p>Agrega apuestas para comenzar</p>
+          </div>
+        </div>
+        
+        <div class="bet-slip-footer hidden" id="bet-slip-footer">
+          <div class="bet-slip-total">
+            <span>Cuota Total:</span>
+            <span id="total-odds">1.00</span>
+          </div>
+          <div class="bet-slip-amount">
+            <label for="bet-amount">Monto:</label>
+            <input type="number" id="bet-amount" min="1" value="10">
+          </div>
+          <div class="bet-slip-potential">
+            <span>Premio Potential:</span>
+            <span id="potential-win">$0.00</span>
+          </div>
+          <button class="btn-primary btn-bet" id="place-bet-btn">
+            <i class="fas fa-check"></i>
+            Confirmar Apuesta
+          </button>
+          <button class="btn-secondary" id="clear-bets-btn">
+            <i class="fas fa-trash"></i>
+            Limpiar
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Bet Modal -->
+    <div id="bet-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Agregar al Ticket</h3>
+          <button class="modal-close" id="modal-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="match-info-modal">
+            <div class="team-modal">
+              <span class="team-name" id="modal-home-team">Local</span>
+            </div>
+            <div class="vs-modal">VS</div>
+            <div class="team-modal">
+              <span class="team-name" id="modal-away-team">Visitante</span>
+            </div>
+          </div>
+          <div class="bet-options-modal" id="bet-options-modal">
+            <!-- Bet options will be dynamically inserted -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
+  </div>
+
+  <script src="services/api.js"></script>
+  <script src="services/auth.js"></script>
+  <script src="services/bets.js"></script>
+  <script src="services/matches.js"></script>
+  <script src="components/modal.js"></script>
+  <script src="components/toast.js"></script>
+  <script src="components/render.js"></script>
+  <script src="context/app.js"></script>
+</body>
+</html>
